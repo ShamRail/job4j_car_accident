@@ -19,4 +19,8 @@ public class AccidentService {
         return repository.findAll();
     }
 
+    public Accident saveOrUpdate(Accident accident) {
+        return repository.saveOrUpdate(accident);
+    }
+
 }

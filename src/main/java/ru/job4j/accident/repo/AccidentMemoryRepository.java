@@ -37,4 +37,22 @@ public class AccidentMemoryRepository {
         return accidents.values();
     }
 
+    public Accident saveOrUpdate(Accident accident) {
+        return accident.getId() == 0 ? save(accident) : update(accident);
+    }
+
+    public Accident save(Accident accident) {
+        id.incrementAndGet();
+        accident.setId(id.get());
+        accidents.put(accident.getId(), accident);
+        return accident;
+    }
+
+    public Accident update(Accident accident) {
+        if (accidents.containsKey(accident.getId())) {
+            accidents.put(accident.getId(), accident);
+        }
+        return accident;
+    }
+
 }
