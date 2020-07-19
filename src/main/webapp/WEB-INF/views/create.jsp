@@ -34,6 +34,11 @@
             <label>Адресс:</label>
             <input  type="text" class="form-control" name="address">
         </div>
+        <select class="form-group" name="type.id">
+            <c:forEach var="type" items="${types}" >
+                <option value="${type.id}">${type.name}</option>
+            </c:forEach>
+        </select>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </div>
