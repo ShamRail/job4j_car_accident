@@ -6,11 +6,11 @@ public class Accident {
 
     private int id;
 
-    private String name;
+    private String name = "";
 
-    private String text;
+    private String text = "";
 
-    private String address;
+    private String address = "";
 
     public Accident() { }
 

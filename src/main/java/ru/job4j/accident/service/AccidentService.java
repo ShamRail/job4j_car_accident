@@ -23,4 +23,7 @@ public class AccidentService {
         return repository.saveOrUpdate(accident);
     }
 
+    public Accident findById(int id) {
+        return repository.findById(id);
+    }
 }

@@ -22,17 +22,18 @@
         </ul>
     </div>
     <form action="${pageContext.request.contextPath}/save" method="post">
+        <input type="hidden" name="id" value="${accident.id}">
         <div class="form-group">
             <label>Название:</label>
-            <input  type="text" class="form-control" name="name">
+            <input  type="text" class="form-control" name="name" value="${accident.name}">
         </div>
         <div class="form-group">
             <label>Описание:</label>
-            <input  type="text" class="form-control" name="text">
+            <input  type="text" class="form-control" name="text" value="${accident.text}">
         </div>
         <div class="form-group">
             <label>Адресс:</label>
-            <input  type="text" class="form-control" name="address">
+            <input  type="text" class="form-control" name="address" value="${accident.address}">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>

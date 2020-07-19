@@ -55,4 +55,7 @@ public class AccidentMemoryRepository {
         return accident;
     }
 
+    public Accident findById(int id) {
+        return accidents.getOrDefault(id, new Accident());
+    }
 }
