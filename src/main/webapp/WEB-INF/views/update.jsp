@@ -1,3 +1,6 @@
+<%@ page import="ru.job4j.accident.model.Rule" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="ru.job4j.accident.model.Accident" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -34,6 +37,35 @@
         <div class="form-group">
             <label>Адресс:</label>
             <input  type="text" class="form-control" name="address" value="${accident.address}">
+        </div>
+        <div class="form-group">
+            <label>Тип:</label>
+            <select class="form-control" name="type.id">
+                <c:forEach var="type" items="${types}" >
+                    <c:if test="${type.id == accident.type.id}">
+                        <option class="form-control" value="${type.id}" selected>${type.name}</option>
+                    </c:if>
+                    <c:if test="${type.id != accident.type.id}">
+                        <option class="form-control" value="${type.id}">${type.name}</option>
+                    </c:if>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Статья:</label>
+            <select class="form-control" name="rIds" multiple>
+                <%
+                    Accident accident = (Accident) request.getAttribute("accident");
+                    Collection<Rule> accidentRules = accident.getRules();
+                    Collection<Rule> allRules = (Collection<Rule>) request.getAttribute("rules");
+                    for (Rule rule : allRules) {
+                        if (accidentRules.contains(rule)) { %>
+                            <option class="form-control" value="<%=rule.getId()%>" selected><%=rule.getName()%></option>
+                    <% } else { %>
+                             <option class="form-control" value="<%=rule.getId()%>"><%=rule.getName()%></option>
+                    <% } %>
+                <% } %>
+            </select>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>

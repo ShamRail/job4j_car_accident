@@ -5,10 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.accident.service.AccidentService;
 
+import java.util.TreeSet;
+
 @Controller
 public class IndexController {
 
-    private AccidentService service;
+    private final AccidentService service;
 
     public IndexController(AccidentService service) {
         this.service = service;
@@ -16,7 +18,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("accidents", service.findAll());
+        model.addAttribute("accidents", new TreeSet<>(service.findAll()));
         return "index";
     }
 

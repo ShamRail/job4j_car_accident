@@ -14,6 +14,12 @@ public class Rule {
         return rule;
     }
 
+    public static Rule of(String name) {
+        Rule rule = new Rule();
+        rule.name = name;
+        return rule;
+    }
+
     public int getId() {
         return id;
     }

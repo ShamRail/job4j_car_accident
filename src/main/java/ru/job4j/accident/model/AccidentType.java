@@ -16,6 +16,12 @@ public class AccidentType {
         return type;
     }
 
+    public static AccidentType of(String name) {
+        AccidentType type = new AccidentType();
+        type.name = name;
+        return type;
+    }
+
     public int getId() {
         return id;
     }

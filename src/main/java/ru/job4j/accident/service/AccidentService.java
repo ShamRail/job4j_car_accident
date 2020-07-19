@@ -4,7 +4,10 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repo.AccidentJdbcTemplate;
 import ru.job4j.accident.repo.AccidentMemoryRepository;
+import ru.job4j.accident.repo.AccidentTypeJdbcTemplate;
+import ru.job4j.accident.repo.RuleJdbcTemplate;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,10 +17,16 @@ import java.util.stream.Collectors;
 @Service
 public class AccidentService {
 
-    private AccidentMemoryRepository repository;
+    private final AccidentJdbcTemplate repository;
 
-    public AccidentService(AccidentMemoryRepository repository) {
+    private final AccidentTypeJdbcTemplate accidentTypeRepo;
+
+    private final RuleJdbcTemplate ruleRepository;
+
+    public AccidentService(AccidentJdbcTemplate repository, AccidentTypeJdbcTemplate accidentTypeRepo, RuleJdbcTemplate ruleRepository) {
         this.repository = repository;
+        this.accidentTypeRepo = accidentTypeRepo;
+        this.ruleRepository = ruleRepository;
     }
 
     public Collection<Accident> findAll() {
@@ -33,17 +42,17 @@ public class AccidentService {
     }
 
     public Collection<AccidentType> findAllTypes() {
-        return repository.findAllTypes();
+        return accidentTypeRepo.findAll();
     }
 
     public Collection<Rule> findAllRules() {
-        return repository.findAllRules();
+        return ruleRepository.findAll();
     }
 
     public Set<Rule> mapRules(String[] ids) {
         return Arrays.stream(ids)
                 .map(Integer::parseInt)
-                .map(id -> repository.findRuleById(id))
+                .map(ruleRepository::findById)
                 .collect(Collectors.toSet());
     }
 }

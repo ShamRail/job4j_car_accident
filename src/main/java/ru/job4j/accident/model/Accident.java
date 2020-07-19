@@ -1,9 +1,10 @@
 package ru.job4j.accident.model;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Accident {
+public class Accident implements Comparable<Accident> {
 
     private int id;
 
@@ -15,7 +16,7 @@ public class Accident {
 
     private AccidentType type;
 
-    private Set<Rule> rules;
+    private Set<Rule> rules = new HashSet<>();
 
     public Accident() { }
 
@@ -24,6 +25,13 @@ public class Accident {
         this.name = name;
         this.text = text;
         this.address = address;
+    }
+
+    public Accident(String name, String text, String address, AccidentType type) {
+        this.name = name;
+        this.text = text;
+        this.address = address;
+        this.type = type;
     }
 
     public Set<Rule> getRules() {
@@ -97,5 +105,10 @@ public class Accident {
                 "Accident(%d, %s, %s, %s)",
                 id, name, text, address
         );
+    }
+
+    @Override
+    public int compareTo(Accident o) {
+        return Integer.compare(id, o.id);
     }
 }

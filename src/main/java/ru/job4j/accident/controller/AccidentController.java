@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AccidentController {
 
-    private AccidentService service;
+    private final AccidentService service;
 
     public AccidentController(AccidentService service) {
         this.service = service;
@@ -37,6 +37,8 @@ public class AccidentController {
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("rules", service.findAllRules());
+        model.addAttribute("types", service.findAllTypes());
         model.addAttribute("accident", service.findById(id));
         return "update";
     }
