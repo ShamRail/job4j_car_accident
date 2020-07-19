@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.service.AccidentService;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccidentController {
@@ -24,16 +22,15 @@ public class AccidentController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        List<AccidentType> types = new ArrayList<>();
-        types.add(AccidentType.of(1, "Две машины"));
-        types.add(AccidentType.of(2, "Машина и человек"));
-        types.add(AccidentType.of(3, "Машина и велосипед"));
-        model.addAttribute("types", types);
+        model.addAttribute("types", service.findAllTypes());
+        model.addAttribute("rules", service.findAllRules());
         return "create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+        String[] ids = req.getParameterValues("rIds");
+        accident.setRules(service.mapRules(ids));
         service.saveOrUpdate(accident);
         return "redirect:/";
     }

@@ -34,11 +34,22 @@
             <label>Адресс:</label>
             <input  type="text" class="form-control" name="address">
         </div>
-        <select class="form-group" name="type.id">
-            <c:forEach var="type" items="${types}" >
-                <option value="${type.id}">${type.name}</option>
-            </c:forEach>
-        </select>
+        <div class="form-group">
+            <label>Тип:</label>
+            <select class="form-control" name="type.id">
+                <c:forEach var="type" items="${types}" >
+                    <option class="form-control" value="${type.id}">${type.name}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Статья:</label>
+            <select class="form-control" name="rIds" multiple>
+                <c:forEach var="rule" items="${rules}" >
+                    <option class="form-control" value="${rule.id}">${rule.name}</option>
+                </c:forEach>
+            </select>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </div>
