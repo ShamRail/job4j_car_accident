@@ -18,6 +18,6 @@ CREATE TABLE IF NOT EXISTS accident(
 
 CREATE TABLE IF NOT EXISTS rule_acc(
     id SERIAL PRIMARY KEY,
-    acc_id INT REFERENCES accident(id),
+    accident_id INT REFERENCES accident(id),
     rule_id INT REFERENCES acc_rule(id)
 );

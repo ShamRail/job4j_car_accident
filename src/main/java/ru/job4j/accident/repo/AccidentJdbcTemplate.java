@@ -15,7 +15,7 @@ import java.sql.Types;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-@Repository
+//@Repository
 public class AccidentJdbcTemplate {
 
     private final JdbcTemplate jdbc;

@@ -10,7 +10,7 @@ import ru.job4j.accident.model.AccidentType;
 import java.sql.PreparedStatement;
 import java.util.Collection;
 
-@Repository
+//@Repository
 public class AccidentTypeJdbcTemplate {
 
     private final JdbcTemplate db;

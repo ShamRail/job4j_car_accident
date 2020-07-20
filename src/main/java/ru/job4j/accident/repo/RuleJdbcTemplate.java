@@ -12,7 +12,7 @@ import ru.job4j.accident.model.RuleAccident;
 import java.sql.PreparedStatement;
 import java.util.Collection;
 
-@Repository
+//@Repository
 public class RuleJdbcTemplate {
 
     private final JdbcTemplate db;

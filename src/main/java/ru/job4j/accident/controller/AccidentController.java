@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.model.jpa.Accident;
 import ru.job4j.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 public class AccidentController {
@@ -30,16 +34,16 @@ public class AccidentController {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accident.setRules(service.mapRules(ids));
+        accident.setRuleAccidents(service.mapRules(ids, accident));
         service.saveOrUpdate(accident);
         return "redirect:/";
     }
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("rules", service.findAllRules());
-        model.addAttribute("types", service.findAllTypes());
-        model.addAttribute("accident", service.findById(id));
+        model.addAttribute("rules", service.findAllRules().stream().map(r -> Rule.of(r.getId(), r.getName())).collect(Collectors.toSet()));
+        model.addAttribute("types", service.findAllTypes().stream().map(t -> AccidentType.of(t.getId(), t.getName())).collect(Collectors.toSet()));
+        model.addAttribute("accident", service.findAccidentWithRules(id));
         return "update";
     }
 
