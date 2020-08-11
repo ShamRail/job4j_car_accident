@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.accident.model.jpa.Accident;
 import ru.job4j.accident.model.jpa.Rule;
@@ -13,6 +14,7 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
+@Ignore
 public class RuleStoreTest {
 
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()

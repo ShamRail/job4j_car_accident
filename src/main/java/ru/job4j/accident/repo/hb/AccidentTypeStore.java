@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.List;
 
-@Repository
+//@Repository
 public class AccidentTypeStore {
 
     private SessionFactory sessionFactory;
