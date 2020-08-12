@@ -22,6 +22,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/create'/>">Добавить правонарушение</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">${user.username}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/login?logout=true'/>">Выйти</a>
+            </li>
         </ul>
     </div>
     <form action="${pageContext.request.contextPath}/save" method="post">

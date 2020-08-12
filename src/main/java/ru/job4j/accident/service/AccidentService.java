@@ -46,42 +46,42 @@ public class AccidentService {
         this.ruleAccidentRepo = ruleAccidentRepo;
     }
 
-    @PostConstruct
-    public void init() {
-        AccidentType type1 = AccidentType.of("Две машины");
-        AccidentType type2 = AccidentType.of("Машина и человек");
-        AccidentType type3 = AccidentType.of("Машина и велосипед");
-
-        accidentTypeRepo.save(type1);
-        accidentTypeRepo.save(type2);
-        accidentTypeRepo.save(type3);
-
-        Accident accident1 = new Accident("name2", "text2", "address2", type1);
-        Accident accident2 = new Accident("name2", "text2", "address2", type2);
-        Accident accident3 = new Accident("name3", "text3", "address3", type3);
-        Accident accident4 = new Accident("name4", "text4", "address4", type1);
-        Accident accident5 = new Accident("name5", "text5", "address5", type2);
-
-        accidentRepo.save(accident1);
-        accidentRepo.save(accident2);
-        accidentRepo.save(accident3);
-        accidentRepo.save(accident4);
-        accidentRepo.save(accident5);
-
-        Rule rule1 = Rule.of("Статья 123 .. Рф");
-        Rule rule2 = Rule.of("Статья 456 .. Рф");
-        Rule rule3 = Rule.of("Статья 789 .. Рф");
-
-        ruleRepo.save(rule1);
-        ruleRepo.save(rule2);
-        ruleRepo.save(rule3);
-
-        ruleAccidentRepo.save(new RuleAccident(accident1, rule1));
-        ruleAccidentRepo.save(new RuleAccident(accident1, rule2));
-        ruleAccidentRepo.save(new RuleAccident(accident2, rule3));
-        ruleAccidentRepo.save(new RuleAccident(accident3, rule2));
-        ruleAccidentRepo.save(new RuleAccident(accident4, rule3));
-    }
+//    @PostConstruct
+//    public void init() {
+//        AccidentType type1 = AccidentType.of("Две машины");
+//        AccidentType type2 = AccidentType.of("Машина и человек");
+//        AccidentType type3 = AccidentType.of("Машина и велосипед");
+//
+//        accidentTypeRepo.save(type1);
+//        accidentTypeRepo.save(type2);
+//        accidentTypeRepo.save(type3);
+//
+//        Accident accident1 = new Accident("name2", "text2", "address2", type1);
+//        Accident accident2 = new Accident("name2", "text2", "address2", type2);
+//        Accident accident3 = new Accident("name3", "text3", "address3", type3);
+//        Accident accident4 = new Accident("name4", "text4", "address4", type1);
+//        Accident accident5 = new Accident("name5", "text5", "address5", type2);
+//
+//        accidentRepo.save(accident1);
+//        accidentRepo.save(accident2);
+//        accidentRepo.save(accident3);
+//        accidentRepo.save(accident4);
+//        accidentRepo.save(accident5);
+//
+//        Rule rule1 = Rule.of("Статья 123 .. Рф");
+//        Rule rule2 = Rule.of("Статья 456 .. Рф");
+//        Rule rule3 = Rule.of("Статья 789 .. Рф");
+//
+//        ruleRepo.save(rule1);
+//        ruleRepo.save(rule2);
+//        ruleRepo.save(rule3);
+//
+//        ruleAccidentRepo.save(new RuleAccident(accident1, rule1));
+//        ruleAccidentRepo.save(new RuleAccident(accident1, rule2));
+//        ruleAccidentRepo.save(new RuleAccident(accident2, rule3));
+//        ruleAccidentRepo.save(new RuleAccident(accident3, rule2));
+//        ruleAccidentRepo.save(new RuleAccident(accident4, rule3));
+//    }
 
     public Collection<ru.job4j.accident.model.Accident> findAll() {
         Collection<Accident> all = new ArrayList<>();

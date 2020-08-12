@@ -1,5 +1,6 @@
 package ru.job4j.accident.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class AccidentController {
     public String create(Model model) {
         model.addAttribute("types", service.findAllTypes());
         model.addAttribute("rules", service.findAllRules());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "create";
     }
 
@@ -44,6 +46,7 @@ public class AccidentController {
         model.addAttribute("rules", service.findAllRules().stream().map(r -> Rule.of(r.getId(), r.getName())).collect(Collectors.toSet()));
         model.addAttribute("types", service.findAllTypes().stream().map(t -> AccidentType.of(t.getId(), t.getName())).collect(Collectors.toSet()));
         model.addAttribute("accident", service.findAccidentWithRules(id));
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "update";
     }
 
