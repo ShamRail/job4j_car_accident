@@ -2,12 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
-<c:if test="${not empty errorMessge}">
-    <div style="color:red; font-weight: bold; margin: 30px 0px;">
-            ${errorMessge}
-    </div>
-</c:if>
-<form name='login' action="<c:url value='/login'/>" method='POST'>
+<form name='login' action="<c:url value='/reg'/>" method='POST'>
     <table>
         <tr>
             <td>UserName:</td>
@@ -20,10 +15,12 @@
         <tr>
             <td colspan='2'><input name="submit" type="submit" value="submit" /></td>
         </tr>
+        <tr>
+            <td colspan='2'>
+                <a href="<c:url value='/login'/>">Есть учетная запись? Войти</a>
+            </td>
+        </tr>
     </table>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <br>
-    <a href="<c:url value='/reg'/>">Нет учетной записи? Создать</a>
 </form>
 </body>
 </html>
