@@ -84,24 +84,20 @@ public class AccidentService {
 //    }
 
     public Collection<ru.job4j.accident.model.Accident> findAll() {
-        Collection<Accident> all = new ArrayList<>();
-        accidentRepo.findAll().forEach(all::add);
-        Collection<ru.job4j.accident.model.Accident> accidents = new LinkedList<>();
-        for (Accident accident : all) {
-            ru.job4j.accident.model.Accident dto = new ru.job4j.accident.model.Accident(
-                    accident.getId(), accident.getName(), accident.getText(), accident.getAddress()
-            );
-            dto.setType(ru.job4j.accident.model.AccidentType.of(
-                    accident.getType().getId(), accident.getType().getName())
-            );
-            dto.setRules(
-                    ruleAccidentRepo.findByAccident(accident).stream().map(
-                            r -> ru.job4j.accident.model.Rule.of(r.getRule().getId(), r.getRule().getName())
-                    ).collect(Collectors.toSet())
-            );
-            accidents.add(dto);
-        }
-        return accidents;
+        return accidentRepo.findAllWithRules().stream()
+                .map(a -> {
+                    ru.job4j.accident.model.Accident dto =
+                            new ru.job4j.accident.model.Accident(a.getId(), a.getName(), a.getText(), a.getAddress());
+                    dto.setType(
+                            ru.job4j.accident.model.AccidentType.of(a.getType().getId(), a.getType().getName())
+                    );
+                    dto.setRules(
+                            a.getRuleAccidents().stream().map(
+                                    r -> ru.job4j.accident.model.Rule.of(r.getRule().getId(), r.getRule().getName())
+                            ).collect(Collectors.toSet())
+                    );
+                    return dto;
+                }).collect(Collectors.toList());
     }
 
     public Accident saveOrUpdate(Accident accident) {
